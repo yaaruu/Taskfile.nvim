@@ -30,7 +30,7 @@ end
 
 -- Return a list of all tasks
 M.get_tasks = function()
-	local response = vim.fn.system("go-task --list --json")
+	local response = vim.fn.system("task --list-all --json")
 	local data = vim.fn.json_decode(response)
 	if data == nil or data.tasks == nil then
 		return {}
@@ -41,7 +41,7 @@ end
 
 -- Execute the given task in a terminal window
 M.run_task = function(task)
-	vim.fn.execute(":terminal go-task " .. task)
+	vim.fn.execute(":terminal task " .. task)
 end
 
 -- Called whenever a user tries to tab complete
