@@ -6,7 +6,9 @@ M.setup = function(_) end
 
 -- Executes when a choice is selected
 M.on_choice = function(item, _)
-	M.run_task(item.name)
+  if item ~= nil then
+	  M.run_task(item.name)
+  end
 end
 
 -- Open a selection window to select a task to run
@@ -41,7 +43,7 @@ end
 
 -- Execute the given task in a terminal window
 M.run_task = function(task)
-	vim.fn.execute(":terminal task " .. task)
+	vim.fn.execute(":!task " .. task)
 end
 
 -- Called whenever a user tries to tab complete
