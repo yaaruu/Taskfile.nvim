@@ -43,7 +43,7 @@ end
 
 -- Execute the given task in a terminal window
 M.run_task = function(task)
-	vim.fn.execute(":!task " .. task)
+	vim.fn.execute(":terminal task " .. task)
 end
 
 -- Called whenever a user tries to tab complete
@@ -62,6 +62,12 @@ local complete = function(ArgLead, _, _)
 	table.sort(promptKeys)
 	return promptKeys
 end
+
+vim.api.nvim_create_autocmd("TermClose", {
+    callback = function()
+       vim.cmd("bdelete")
+    end
+})
 
 -- Create a command, ':Task'
 vim.api.nvim_create_user_command("Task", function(input)
